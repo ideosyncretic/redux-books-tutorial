@@ -7,7 +7,14 @@ import { bindActionCreators } from 'redux'
 class BookList extends Component {
   renderList(){
     return this.props.books.map((book) => {
-      return <li key={book.title} className="list-group-item">{book.title}</li>
+      return (
+        <li
+          key={book.title}
+          onClick={() => this.props.selectBook(book) }
+          className="list-group-item">
+          {book.title}
+        </li>
+      )
     })
   }
 
@@ -33,5 +40,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ selectBook: selectBook }, dispatch)
 }
 
-// take component, give it some part of state as props, and return a container
+// take component, give it some part of state and methods as props, and return a container
 export default connect(mapStateToProps, mapDispatchToProps)(BookList)
